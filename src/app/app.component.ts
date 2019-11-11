@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { templateJitUrl } from '@angular/compiler';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +39,24 @@ export class AppComponent {
   buscaCampos(criterio: string){
     return this.pessoas.filter((pessoa) => Object.keys(pessoa).some
     (chave=> pessoa[chave].toString().includes(criterio)));
+  }
+
+  ngOnInit(){
+    const observable = new Observable(subscriber => {
+      subscriber.next(100);
+      subscriber.next(2);
+      subscriber.next(300);
+      setTimeout(() => {
+        subscriber.next(4);
+        subscriber.complete();
+      }, 1000);
+    });
+      console.log('Antes de executar subscribe');
+      observable.subscribe({
+        next(x) { console.log('recebeu o valor ' + x);},
+        error(err) {console.error('Erro: ' + err);},
+        complete() {console.log('terminou o subscribe');}     
+    });
   }
 
   buscar(valor: string){
