@@ -31,6 +31,10 @@ export class AppComponent {
     this.pessoas.map(pessoa => pessoa.salario += pessoa.salario * percentual/100);
   }
 
+  verificaSalario(valor: number){
+    return this.pessoas.every(pessoa => pessoa.salario > valor);
+  }
+
   buscar(valor: string){
     this.nomesFiltro = [];
 

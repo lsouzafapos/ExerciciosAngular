@@ -22,4 +22,6 @@
 <input #percentual placeholder="digite o percentual"/>
 <button (click)="aumentarSalario(percentual.value)">Aumentar Salario</button>
 
+<p>{{verificaSalario(500)?'Todo mundo ganha mais que 500': 'Nem todo mundo ganha mais que 500'}}</p>
+
 <router-outlet></router-outlet>
