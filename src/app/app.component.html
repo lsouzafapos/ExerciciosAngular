@@ -5,4 +5,6 @@
   <p *ngIf="nomes.length == 0">Nenhum nome encontrado, usando *ngIf</p>
 
   <p [hidden]="nomes.length > 0">Nenhum nome encontrado, usando hidden</p>
+
+  <input #box placeholder="digite um nome" (keyup)="buscar(box.value)"/>
 <router-outlet></router-outlet>
