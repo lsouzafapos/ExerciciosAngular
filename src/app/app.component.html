@@ -1,6 +1,4 @@
-<ul>
-    <li *ngFor="let nome of nomes">
-      {{nome}}
-    </li>
+<ul *ngFor="let nome of nomes, let i= index">
+    <li>nome da pessoa é : {{nome}}, está na posição {{i + 1}} </li>
   </ul>
 <router-outlet></router-outlet>
