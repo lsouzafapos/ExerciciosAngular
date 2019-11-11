@@ -18,6 +18,7 @@ export class AppComponent {
     {id: 5, nome: 'felipe', salario: 10000},
     {id: 6, nome: 'carlos', salario: 800},
   ]
+  observable : Observable<string>;
 
   getValorTotal(): Number{
     return this.pessoas.reduce(
@@ -42,21 +43,31 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    const observable = new Observable(subscriber => {
-      subscriber.next(100);
-      subscriber.next(2);
-      subscriber.next(300);
-      setTimeout(() => {
-        subscriber.next(4);
-        subscriber.complete();
-      }, 1000);
+    this.observable = new Observable(subscriber => {
+      setInterval(() => {
+        subscriber.next(this.makeId(5));
+      }, 10000);
     });
-      console.log('Antes de executar subscribe');
-      observable.subscribe({
-        next(x) { console.log('recebeu o valor ' + x);},
-        error(err) {console.error('Erro: ' + err);},
-        complete() {console.log('terminou o subscribe');}     
+    let lista: Array<string> = [];
+    this.observable.subscribe({
+      next(x) {lista.push(x); },
+      error(err) {alert('ocorreu um erro ' + err);}
     });
+    this.nomes = lista;
+    
+  }
+
+  enviar(valor: string){
+    this.nomes.push(valor);
+  }
+
+  makeId(length){
+    var text = "";
+    var possible = "ABCHUAEHUAHAFLFÇDÇVMDIEJEI";
+    for(var i = 0; i < length; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+    
   }
 
   buscar(valor: string){
